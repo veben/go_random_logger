@@ -1,8 +1,12 @@
 FROM golang:latest
-ENV APP_NAME=go_random_logger
-MAINTAINER veben
-LABEL org.opencontainers.image.source https://github.com/veben/$APP_NAME
+
+ARG GITHUB_USERNAME
+ENV MY_ENV=$GITHUB_USERNAME
+
+MAINTAINER "${GITHUB_USERNAME}"
+LABEL org.opencontainers.image.source="https://github.com/${GITHUB_USERNAME}/go_random_logger"
+
 WORKDIR /app
 COPY . .
-RUN go mod tidy && go build -o $APP_NAME .
-CMD ["./$APP_NAME"]
+RUN go mod tidy && go build -o go_random_logger .
+CMD ["./go_random_logger"]
