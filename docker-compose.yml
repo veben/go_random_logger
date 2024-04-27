@@ -1,0 +1,6 @@
+services:
+  go_random_logger:
+    build: .
+    image: docker.pkg.github.com/veben/go_random_logger/go_random_logger:0.0.1
+    volumes:
+      - /var/log:/var/log
