@@ -1,9 +1,8 @@
 FROM golang:latest
 
 ARG GITHUB_USERNAME
-ENV MY_ENV=$GITHUB_USERNAME
 
-MAINTAINER "${GITHUB_USERNAME}"
+LABEL org.opencontainers.image.authors="${GITHUB_USERNAME}"
 LABEL org.opencontainers.image.source="https://github.com/${GITHUB_USERNAME}/go_random_logger"
 
 WORKDIR /app
