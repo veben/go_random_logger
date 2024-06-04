@@ -4,6 +4,6 @@ services:
       context: .
       args:
         - GITHUB_USERNAME=${GITHUB_USERNAME}
-    image: docker.pkg.github.com/$GITHUB_USERNAME/go_random_logger/go_random_logger:0.0.1
+    image: ghcr.io/$GITHUB_USERNAME/go_random_logger/go_random_logger:0.0.1
     volumes:
       - /var/log:/var/log
