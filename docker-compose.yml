@@ -4,6 +4,6 @@ services:
       context: .
       args:
         - GITHUB_USERNAME=${GITHUB_USERNAME}
-    image: ghcr.io/$GITHUB_USERNAME/go_random_logger/go_random_logger:0.0.1
+    image: ghcr.io/$GITHUB_USERNAME/go_random_logger/go_random_logger:$TAG_VERSION
     volumes:
       - /var/log:/var/log
