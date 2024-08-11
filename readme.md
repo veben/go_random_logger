@@ -39,6 +39,11 @@ To create a new version of the logger, follow these steps:
 1. Increment the version of the logger. For that, modify `TAG_VERSION` environment variable in `.github/workflows/publish.yml` file to reflect the new version
 2. Push or merge your changes to the **main** branch. This action will trigger the GitHub Actions workflow to build and publish the new version.
 
+⚠️ Important Note:
+If you initially create a package using the alternative method described below and later attempt to publish a new version using GitHub Actions, you may encounter permission issues. To resolve this, you may need to manually adjust the package permissions directly within the GitHub Package settings.
+
+See: https://stackoverflow.com/questions/69014742/github-denied-permission-denied-write-package
+
 ### 2-alternative. Creating a New Version Manually
 
 #### 1. Generating a Personal Access Token
