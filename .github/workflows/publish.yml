@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      packages: write
-      deployments: write  # Needed to push tags
+      contents: write    # Required to push tags and create new releases
+      packages: write    # Required to push Docker images
+      deployments: write # Required if your workflow involves deployments
 
     steps:
       - name: Checkout repository
