@@ -61,6 +61,7 @@ GITHUB_TOKEN=<your_token>
 #### 3. Incrementing the version of the logger
 - Update the tag version in the `.env` file, replacing `<version>` with your new version:
 ```text
+REGISTRY=ghcr.io
 TAG_VERSION=<version>
 ```
 
@@ -86,7 +87,7 @@ docker-compose build
 #### 7. Pushing the docker image
 - Log in to GitHub Packages
 ```sh
-echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
+echo $GITHUB_TOKEN | docker login $REGISTRY -u $GITHUB_USERNAME --password-stdin
 ```
 - Push the Docker image using Docker Compose:
 ```sh
