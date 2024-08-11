@@ -3,11 +3,11 @@ name: Publish Docker Image
 on:
   push:
     branches:
-      - test-ci
+      - main
 
 env:
   REGISTRY: ghcr.io
-  TAG_VERSION: 1.1
+  TAG_VERSION: 1.0
   GITHUB_USERNAME: veben
 
 jobs:
