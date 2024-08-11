@@ -29,6 +29,8 @@ docker exec -it `docker container ls | grep go_random_log | awk '{print $1}'` ba
 ```
 
 ## III. Creating a new version of the logger
+
+## IV. Creating a new version of the logger (without Github Actions)
 Follow these steps to create a new version of the logger:
 
 ### 1. Generating a Personal Access Token
@@ -51,25 +53,27 @@ TAG_VERSION=<version>
 ```
 - Update the `CHANGELOG.md` to describe the changes in the new version
 
-### 3. Creating a new tag
-- Create and push a new tag:
+### 3. Loading environment variables
+- Load the environment variables from the `.env` file
 ```sh
-git tag <version>
-git push origin <version>
+source .env
 ```
 
-### 4. Building the docker image
+### 4. Creating a new tag
+- Create and push a new tag:
+```sh
+git tag $TAG_VERSION
+git push origin $TAG_VERSION
+```
+
+### 5. Building the docker image
 - Build using docker compose:
 ```sh
 docker-compose build
 ```
 
-### 5. Pushing the docker image
-- Load the environment variables from the `.env` file
-```sh
-source .env
-```
-- Log in to the GitHub Container Registry
+### 6. Pushing the docker image
+- Log in to GitHub Packages
 ```sh
 echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
 ```

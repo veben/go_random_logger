@@ -1,23 +1,6 @@
 # CHANGELOG
 
-## 0.0.1
-Initial release with the capability to continuously log messages to `/var/log/random.log` until the program is terminated.
-- Includes 3 different possible log messages
-- Supports 3 log levels: **INFO**, **WARNING**, and **ERROR**
-
-Example log entries:
-
-```plaintext
-2024/06/05 21:43:14 [WARNING] Another random log message
-2024/06/05 21:43:17 [INFO] This is a random log message
-2024/06/05 21:43:19 [INFO] Random log message number three
-2024/06/05 21:45:01 [ERROR] Random log message number three
-2024/06/05 21:45:03 [INFO] Random log message number three
-2024/06/05 21:45:04 [WARNING] Another random log message
-2024/06/05 21:45:06 [ERROR] Random log message number three
-```
-
-# 0.2
+## 0.2
 1. Enhanced log message generation with a `randomSentence` function, creating random messages composed of **subjects** + **verbs** + **objects** + **adverbs**
     - Each part contains 50 unique items, resulting in 6,250,000 possible combinations.
 
@@ -38,3 +21,20 @@ Example log entries:
 
 2. Put in place `CHANGELOG.md` and tagging
 3. Reworked `readme.md` accordingly
+
+## 0.0.1
+Initial release with the capability to continuously log messages to `/var/log/random.log` until the program is terminated.
+- Includes 3 different possible log messages
+- Supports 3 log levels: **INFO**, **WARNING**, and **ERROR**
+
+Example log entries:
+
+```plaintext
+2024/06/05 21:43:14 [WARNING] Another random log message
+2024/06/05 21:43:17 [INFO] This is a random log message
+2024/06/05 21:43:19 [INFO] Random log message number three
+2024/06/05 21:45:01 [ERROR] Random log message number three
+2024/06/05 21:45:03 [INFO] Random log message number three
+2024/06/05 21:45:04 [WARNING] Another random log message
+2024/06/05 21:45:06 [ERROR] Random log message number three
+```
