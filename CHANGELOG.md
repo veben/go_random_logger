@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0
+Added CI to build new Docker image and deploy it on Github Packages
+
 ## 0.2
 1. Enhanced log message generation with a `randomSentence` function, creating random messages composed of **subjects** + **verbs** + **objects** + **adverbs**
     - Each part contains 50 unique items, resulting in 6,250,000 possible combinations.

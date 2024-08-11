@@ -29,11 +29,19 @@ docker exec -it `docker container ls | grep go_random_log | awk '{print $1}'` ba
 ```
 
 ## III. Creating a new version of the logger
+To create a new version of the logger, follow these steps:
 
-## IV. Creating a new version of the logger (without Github Actions)
-Follow these steps to create a new version of the logger:
+### 1. Evolving the Logger
+1. Modify the source code as needed
+2. Update the `CHANGELOG.md` to describe the changes in the new version
 
-### 1. Generating a Personal Access Token
+### 2. Creating a new version of the logger (without Github Actions)
+1. Increment the version of the logger. For that, modify `TAG_VERSION` environment variable in `.github/workflows/publish.yml` file to reflect the new version
+2. Push or merge your changes to the **main** branch. This action will trigger the GitHub Actions workflow to build and publish the new version.
+
+### 2-alternative. Creating a New Version Manually
+
+#### 1. Generating a Personal Access Token
 In order to authenticate to GitHub Packages the first thing we'll need is an access token.
 
 - Open your GitHub account, go to Settings -> Developer Settings -> [Personal access tokens](https://github.com/settings/tokens)
@@ -45,34 +53,32 @@ GITHUB_USERNAME=<your_username>
 GITHUB_TOKEN=<your_token>
 ```
 
-### 2. Evolving the Logger
-- Modify the source code as needed
+#### 3. Incrementing the version of the logger
 - Update the tag version in the `.env` file, replacing `<version>` with your new version:
 ```text
 TAG_VERSION=<version>
 ```
-- Update the `CHANGELOG.md` to describe the changes in the new version
 
-### 3. Loading environment variables
+#### 4. Loading environment variables
 - Load the environment variables from the `.env` file
 ```sh
 source .env
 ```
 
-### 4. Creating a new tag
+#### 5. Creating a new tag
 - Create and push a new tag:
 ```sh
 git tag $TAG_VERSION
 git push origin $TAG_VERSION
 ```
 
-### 5. Building the docker image
+#### 6. Building the docker image
 - Build using docker compose:
 ```sh
 docker-compose build
 ```
 
-### 6. Pushing the docker image
+#### 7. Pushing the docker image
 - Log in to GitHub Packages
 ```sh
 echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
