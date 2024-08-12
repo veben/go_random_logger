@@ -7,8 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  TAG_VERSION: 1.0
-  GITHUB_USERNAME: veben
+  TAG_VERSION: 1
 
 jobs:
   build-and-push:
@@ -21,15 +20,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Load .env file
-        run: |
-          if [ -f .env ]; then
-            source .env
-            echo "Loaded environment variables from .env"
-          else
-            echo ".env file not found"
-          fi
 
       - name: Create and push Git tag
         run: |
