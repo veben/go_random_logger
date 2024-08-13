@@ -28,63 +28,64 @@ docker exec -it `docker container ls | grep go_random_log | awk '{print $1}'` ba
 2024/06/05 21:50:51 [WARNING] The panda swirls in the lagoon relentlessly.
 ```
 
-## III. Creating a new version of the logger
+## III. Creating a new version of the Logger
 To create a new version of the logger, follow these steps:
 
 ### 1. Evolving the Logger
 1. Modify the source code as needed
 2. Update the `CHANGELOG.md` to describe the changes in the new version
 
-### 2. Creating a new version of the logger (without Github Actions)
-1. Increment the version of the logger. For that, modify `TAG_VERSION` environment variable in `.github/workflows/publish.yml` file to reflect the new version
-2. Push or merge your changes to the **main** branch. This action will trigger the GitHub Actions workflow to build and publish the new version.
+### 2. Creating a new version automatically (with Github Actions)
+1. Increment the version of the logger. For that, modify `TAG_VERSION` environment variable in `.github/workflows/publish.yml` file to reflect the new version.
+2. Push or merge your changes to the **main** branch. This action will trigger the GitHub Actions workflow to build and publish the new version of the Docker image.
 
 ⚠️ Important Note:
 If you initially create a package using the alternative method described below and later attempt to publish a new version using GitHub Actions, you may encounter permission issues. To resolve this, you may need to manually adjust the package permissions directly within the GitHub Package settings.
 
 See: https://stackoverflow.com/questions/69014742/github-denied-permission-denied-write-package
 
-### 2-alternative. Creating a New Version Manually
+### 2-Alternative: Creating a new version manually
 
-#### 1. Generating a Personal Access Token
-In order to authenticate to GitHub Packages the first thing we'll need is an access token.
+#### 1. Generate a Personal Access Token
+To authenticate with GitHub Packages, you need to create a personal access token.
 
-- Open your GitHub account, go to Settings -> Developer Settings -> [Personal access tokens](https://github.com/settings/tokens)
-- Click **Generate new Token**
-- Give it a name, select **write:packages** and save the token
-- Define a `.env` file with your GitHub username and access token:
+1. Open your GitHub account, go to Settings -> Developer Settings -> [Personal access tokens](https://github.com/settings/tokens)
+2. Click **Generate new Token**
+3. Give it a name, select **write:packages** and save the token
+4. Define a `.env` file with your GitHub username and access token:
 ```text
 GITHUB_USERNAME=<your_username>
 GITHUB_TOKEN=<your_token>
 ```
 
-#### 3. Incrementing the version of the logger
-- Update the tag version in the `.env` file, replacing `<version>` with your new version:
+#### 2. Define Registry Address and Increment Logger Version
+- Update the tag version in the `.env` file, replacing `<version>` with your new version
+- Add as the registry domain for the GitHub Container Registry:
 ```text
 REGISTRY=ghcr.io
 TAG_VERSION=<version>
 ```
 
-#### 4. Loading environment variables
+#### 3. Load Environment Variables
 - Load the environment variables from the `.env` file
 ```sh
 source .env
 ```
 
-#### 5. Creating a new tag
-- Create and push a new tag:
+#### 4. Create a New Tag
+Create and push a new tag to your repository:
 ```sh
 git tag $TAG_VERSION
 git push origin $TAG_VERSION
 ```
 
-#### 6. Building the docker image
-- Build using docker compose:
+#### 5. Build the Docker Image
+Build the Docker image using Docker Compose:
 ```sh
 docker-compose build
 ```
 
-#### 7. Pushing the docker image
+#### 6. Push the Docker Image
 - Log in to GitHub Packages
 ```sh
 echo $GITHUB_TOKEN | docker login $REGISTRY -u $GITHUB_USERNAME --password-stdin
